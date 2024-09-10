@@ -50,6 +50,8 @@ class Birthday(Field):
     def value(self, new_value):
         self.__value = datetime(*new_value)
         today_date = datetime.now()
+
+        # Перевірка на правильність дня народження - якщо ДН відбувся у попередні 100 років, то ДН приймається
         if not datetime(today_date.year - 100, today_date.month, today_date.day) <= self.birthday_date <= today_date:
             self.__value = None
             raise ValueError("WrongBirthdayDate")
